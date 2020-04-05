@@ -19,7 +19,7 @@ const MainMenu = () => {
                 <button>About</button>
             </Link>
             <Link to="/dashboard">
-                <button>Dashboard</button>
+                <button>Notifications </button>
             </Link>
             <Link to="/help">
                 <button>Help</button>

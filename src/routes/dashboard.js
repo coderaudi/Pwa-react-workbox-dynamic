@@ -20,7 +20,10 @@ class Dashboard extends Component {
             vibrate: [100, 50, 200]
         }
 
-        new Notification(notificationMessage, option);
+        //  new Notification(notificationMessage, option);
+        navigator.serviceWorker.ready.then(sw => {
+            sw.showNotification(notificationMessage, option)
+        });
     }
 
 
@@ -45,7 +48,7 @@ class Dashboard extends Component {
     render() {
         return (
             <div>
-                <h1>Dashboard</h1>
+                <h1>Dashboard  - Dashboard</h1>
 
                 <h3>Push Notification</h3>
 
@@ -58,6 +61,9 @@ class Dashboard extends Component {
                 <br />
 
                 <button onClick={() => this.pushNotification()}>Push Notification</button>
+
+                <br />
+                <br />
 
                 <button onClick={() => this.helpNotification()}>Help page notification </button>
             </div>

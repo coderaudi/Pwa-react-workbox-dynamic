@@ -119,7 +119,7 @@ class App extends Component {
         <AppStart />
 
 
-        <button class="add-button">Add to home screen</button>
+        {/* <button class="add-button">Add to home screen</button>
         <button class="enable-notification">Enable Notification</button>
         <h1>React- pwa - workbox</h1>
         <button onClick={() => this.getTodo()}> get req GetTodo</button>
@@ -155,7 +155,7 @@ class App extends Component {
         <button onClick={() => this.deletePost()} >Delete Post Api</button>
 
         <hr />
-
+ */}
 
 
       </div>

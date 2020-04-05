@@ -1,14 +1,13 @@
 {
-  "name": "Progressive Web Application -todo's",
-  "short_name": "PWA-todo's",
+  "name": "Progressive Web Application -Basic's",
+  "short_name": "PWA-react",
   "theme_color": "#e9004d",
   "background_color": "#31aab6",
   "display": "standalone",
   "orientation": "portrait",
   "Scope": "/",
   "start_url": "/",
-  "icons": [
-    {
+  "icons": [{
       "src": "images/icons/icon-72x72.png",
       "sizes": "72x72",
       "type": "image/png"
