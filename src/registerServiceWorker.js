@@ -10,12 +10,12 @@
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
-    // [::1] is the IPv6 localhost address.
-    window.location.hostname === '[::1]' ||
-    // 127.0.0.1/8 is considered localhost for IPv4.
-    window.location.hostname.match(
-      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-    )
+  // [::1] is the IPv6 localhost address.
+  window.location.hostname === '[::1]' ||
+  // 127.0.0.1/8 is considered localhost for IPv4.
+  window.location.hostname.match(
+    /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+  )
 );
 
 export default function register() {
@@ -33,22 +33,25 @@ export default function register() {
       const swUrl = `${process.env.PUBLIC_URL}/custom-sw.js`;
 
 
-         //  online offline check 
-         function handleNetworkChange(event) {
-          if (navigator.onLine) {
-            document.body.style.backgroundColor = "green";
-  
-          } else {
-            document.body.style.backgroundColor = "red";
-          }
-        }
-        window.addEventListener("online", handleNetworkChange);
-        window.addEventListener("offline", handleNetworkChange);
+      //  online offline check 
+      function handleNetworkChange(event) {
+        if (navigator.onLine) {
+          document.body.style.backgroundColor = "green";
 
-          // function to add shorcut on desktop
+        } else {
+          document.body.style.backgroundColor = "red";
+        }
+      }
+      window.addEventListener("online", handleNetworkChange);
+      window.addEventListener("offline", handleNetworkChange);
+
+      // function to add shorcut on desktop
       let deferredPrompt;
       const addBtn = document.querySelector('.add-button');
       addBtn.style.display = 'none';
+
+      const notificationBtn = document.querySelector('.enable-notification');
+      notificationBtn.style.display = 'none';
 
 
       window.addEventListener('beforeinstallprompt', (e) => {
@@ -58,7 +61,7 @@ export default function register() {
         deferredPrompt = e;
         // Update UI to notify the user they can add to home screen
         addBtn.style.display = 'block';
-      
+
         addBtn.addEventListener('click', (e) => {
           // hide our user interface that shows our A2HS button
           addBtn.style.display = 'none';
@@ -66,14 +69,40 @@ export default function register() {
           deferredPrompt.prompt();
           // Wait for the user to respond to the prompt
           deferredPrompt.userChoice.then((choiceResult) => {
-              if (choiceResult.outcome === 'accepted') {
-                console.log('User accepted the A2HS prompt');
-              } else {
-                console.log('User dismissed the A2HS prompt');
-              }
-              deferredPrompt = null;
-            });
+            if (choiceResult.outcome === 'accepted') {
+              console.log('User accepted the A2HS prompt');
+              new Notification("Installation going on !")
+            } else {
+              console.log('User dismissed the A2HS prompt');
+            }
+            deferredPrompt = null;
+          });
         });
+
+
+        if ('Notification' in window) {
+          notificationBtn.style.display = 'block';
+
+          notificationBtn.addEventListener('click', (e) => {
+            Notification.requestPermission(result => {
+              if (result !== "granted") {
+                console.log("you not allowed for notification permission");
+
+                // you cant re-ask again to user
+              } else {
+                //
+                console.log("notification permission done");
+
+                new Notification("Hey you got notification succ", {
+                  body: "this is the notification body parameterss"
+                });
+
+              }
+            })
+          })
+        }
+
+
       });
 
       if (isLocalhost) {
@@ -82,11 +111,16 @@ export default function register() {
 
         // Add some additional logging to localhost, pointing developers to the
         // service worker/PWA documentation.
-        navigator.serviceWorker.ready.then(() => {
+        navigator.serviceWorker.ready.then((sw) => {
           console.log(
             'This web app is being served cache-first by a service ' +
-              'worker. To learn more, visit https://goo.gl/SC7cgQ'
+            'worker. To learn more, visit https://goo.gl/SC7cgQ'
           );
+
+          sw.showNotification("Notification  Service worker is activated!!", {
+            body: "showNotification with service worker"
+          })
+
         });
       } else {
         // Is not local host. Just register service worker
