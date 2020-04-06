@@ -1,0 +1,7 @@
+
+
+// notification subscription 
+
+//  to generate vapid key run only once at development time
+
+npm run web-push generate-vapid-keys

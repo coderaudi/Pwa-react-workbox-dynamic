@@ -91,12 +91,14 @@ export default function register() {
                 // you cant re-ask again to user
               } else {
                 //
-                console.log("notification permission done");
+                // console.log("notification permission done");
 
-                new Notification("Hey you got notification succ", {
-                  body: "this is the notification body parameterss"
-                });
+                // new Notification("Hey you got notification succ", {
+                //   body: "this is the notification body parameterss"
+                // });
 
+                notificationBtn.style.display = 'none'; // hide the noitification btn
+                // notification subscirption 
               }
             })
           })

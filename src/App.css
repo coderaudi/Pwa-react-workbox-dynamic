@@ -36,3 +36,10 @@ button {
   margin-right: 10px;
   padding: 5px;
 }
+
+
+.pwa-feature-btns {
+  display: flex;
+  margin: 20px;
+  padding: 5px;
+}

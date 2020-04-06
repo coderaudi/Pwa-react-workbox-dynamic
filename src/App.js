@@ -116,6 +116,13 @@ class App extends Component {
     return (
       <div className="App">
 
+        <div className="pwa-feature-btns">
+
+          <button class="add-button">Add to homescreen</button>
+          <button class="enable-notification">Enable Notification</button>
+
+        </div>
+
         <AppStart />
 
 
