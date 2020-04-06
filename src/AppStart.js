@@ -8,6 +8,7 @@ import Home from './routes/home';
 import Dashboard from './routes/dashboard';
 import About from './routes/about';
 import Help from './routes/help';
+import Admin from "./routes/admin";
 
 const MainMenu = () => {
     return (
@@ -23,6 +24,9 @@ const MainMenu = () => {
             </Link>
             <Link to="/help">
                 <button>Help</button>
+            </Link>
+            <Link to="/admin">
+                <button>Admin</button>
             </Link>
 
         </div>
@@ -45,6 +49,8 @@ class App extends Component {
                             <Route exact path="/about" component={About} />
                             <Route exact path="/dashboard" component={Dashboard} />
                             <Route exact path="/help" component={Help} />
+                            <Route exact path="/admin" component={Admin} />
+
                         </Switch>
                     </div>
                 </div>

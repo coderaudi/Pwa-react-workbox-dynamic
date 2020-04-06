@@ -40,13 +40,13 @@ self.addEventListener('notificationclick', e => {
   let notification = e.notification;
   let action = e.action;
 
-  if (!action === 'open') {
-    console.log("user said no for notification help page")
-    notification.close();
-  } else {
-    console.log("user hit the confirm(okay) for notification");
+  if (action === 'open') {
     let url = location.origin;
     clients.openWindow(url);
+    notification.close();
+  } else {
+    console.log("Notification _Rejected!");
+   
     notification.close();
   }
 
