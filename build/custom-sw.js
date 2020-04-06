@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.930bdc46ff213d0ac6989627eb5daf1f.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("/precache-manifest.76836aead048358219b005a7d519072d.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 // See https://developers.google.com/web/tools/workbox/guides/configure-workbox
 workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
@@ -42,12 +42,12 @@ self.addEventListener('notificationclick', e => {
   let notification = e.notification;
   let action = e.action;
 
-  if (!action === 'explore') {
+  if (!action === 'open') {
     console.log("user said no for notification help page")
     notification.close();
   } else {
     console.log("user hit the confirm(okay) for notification")
-    clients.openWindow('http://127.0.0.1:8080/');
+    clients.openWindow(location.href);
     notification.close();
   }
 
@@ -76,8 +76,6 @@ self.addEventListener('push', function (e) {
     icon: "images\icons\icon-96x96.png"
   };
 
-  console.log("server push Obj", payload);
-
   var options = {
     body: payload.body,
     icon: 'images\icons\icon-96x96.png',
@@ -89,7 +87,7 @@ self.addEventListener('push', function (e) {
     },
     actions: [
       {
-        action: 'explore', title: 'Explore this new world',
+        action: 'open', title: 'Explore this new world',
         icon: 'images\icons\icon-96x96.png'
       },
       {

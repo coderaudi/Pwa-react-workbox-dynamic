@@ -44,8 +44,9 @@ self.addEventListener('notificationclick', e => {
     console.log("user said no for notification help page")
     notification.close();
   } else {
-    console.log("user hit the confirm(okay) for notification")
-    clients.openWindow(location.href);
+    console.log("user hit the confirm(okay) for notification");
+    let url = location.origin;
+    clients.openWindow(url);
     notification.close();
   }
 

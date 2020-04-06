@@ -82,11 +82,9 @@ class Dashboard extends Component {
         }).then(function (res) {
             if (res.ok) {
                 console.log("new subscriber is added to DB ", res);
-                this.setState({ subscriptionDone: true });
             }
         }).catch(function (err) {
             console.log("server : App subscriber error ", err);
-            this.setState({ subscriptionDone: false });
 
         });
 
@@ -159,14 +157,12 @@ class Dashboard extends Component {
                 <br />
                 <br />
 
-                <button onClick={() => this.configurePushSubscription()}>Confirm Push Subcription</button>
+                <button onClick={() => this.configurePushSubscription()}>Confirm Push Subscription</button>
 
                 <br />
                 <br />
 
-                {this.state.subscriptionDone && <div>
-                    <h3>You are Done with Notification Subcription!!!</h3>
-                </div>}
+                <h6>you will get notification if subscription done!</h6>
 
             </div>
         )
