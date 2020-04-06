@@ -82,10 +82,12 @@ class Dashboard extends Component {
         }).then(function (res) {
             if (res.ok) {
                 console.log("new subscriber is added to DB ", res);
+
+                let subBtn = document.getElementById("sub-notification");
+                subBtn.style.display = "none";
             }
         }).catch(function (err) {
             console.log("server : App subscriber error ", err);
-
         });
 
 
@@ -157,7 +159,12 @@ class Dashboard extends Component {
                 <br />
                 <br />
 
-                <button onClick={() => this.configurePushSubscription()}>Confirm Push Subscription</button>
+                <button
+                    id="sub-notification"
+                    onClick={() => this.configurePushSubscription()}>
+                    Confirm Push Subscription
+                  </button>
+
 
                 <br />
                 <br />
