@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/static/media/logo.ee7cd8ed.svg"
   },
   {
-    "revision": "195499245424ff0629b2",
-    "url": "/static/js/main.19549924.js"
+    "revision": "0ad03a0acfccafafbb36",
+    "url": "/static/js/main.0ad03a0a.js"
   },
   {
-    "revision": "195499245424ff0629b2",
+    "revision": "0ad03a0acfccafafbb36",
     "url": "/static/css/main.1be0a0e7.css"
   },
   {
-    "revision": "36ecca41ba53480cba0c25c4a47e716c",
+    "revision": "40f947aa359b88bded214303de396eab",
     "url": "/index.html"
   }
 ];

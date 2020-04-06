@@ -25,7 +25,7 @@ class Dashboard extends Component {
         this.state = {
             loading: false,
             notificationMessage: "welcome to Notification pUsh",
-
+            subscriptionDone: false
         }
     }
 
@@ -81,10 +81,13 @@ class Dashboard extends Component {
             })
         }).then(function (res) {
             if (res.ok) {
-                console.log("new subscriber is added to DB ", res)
+                console.log("new subscriber is added to DB ", res);
+                this.setState({ subscriptionDone: true });
             }
         }).catch(function (err) {
             console.log("server : App subscriber error ", err);
+            this.setState({ subscriptionDone: false });
+
         });
 
 
@@ -160,6 +163,10 @@ class Dashboard extends Component {
 
                 <br />
                 <br />
+
+                {this.state.subscriptionDone && <div>
+                    <h3>You are Done with Notification Subcription!!!</h3>
+                </div>}
 
             </div>
         )
