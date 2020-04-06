@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.76836aead048358219b005a7d519072d.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("/precache-manifest.863cc8a1bfd92ed5806d6ea87c83b11c.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 // See https://developers.google.com/web/tools/workbox/guides/configure-workbox
 workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
@@ -46,8 +46,9 @@ self.addEventListener('notificationclick', e => {
     console.log("user said no for notification help page")
     notification.close();
   } else {
-    console.log("user hit the confirm(okay) for notification")
-    clients.openWindow(location.href);
+    console.log("user hit the confirm(okay) for notification");
+    let url = location.origin;
+    clients.openWindow(url);
     notification.close();
   }
 

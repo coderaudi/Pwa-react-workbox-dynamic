@@ -24,7 +24,7 @@ class Dashboard extends Component {
         super(params);
         this.state = {
             loading: false,
-            notificationMessage: "welcome to Notification pUsh",
+            notificationMessage: "Push Notification you your Phone",
             subscriptionDone: false
         }
     }
