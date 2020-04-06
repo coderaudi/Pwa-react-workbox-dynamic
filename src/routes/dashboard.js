@@ -116,7 +116,7 @@ class Dashboard extends Component {
             body: "you can visit the help page /in application/site",
             vibrate: [100, 50, 200],
             actions: [
-                { action: "explore", title: "okay" },
+                { action: "open", title: "okay" },
                 { action: "cancel", title: "nope" }
             ]
         }
