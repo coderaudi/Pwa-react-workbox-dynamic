@@ -70,8 +70,8 @@ class Dashboard extends Component {
             // which is used to send the notification to the user 
             console.log("this is subsciriton body", newSub);
 
-            let firebaseRealtimeDbUrl = "https://push-pwanotification.firebaseio.com/subscriber.json";
-            return fetch(firebaseRealtimeDbUrl, {
+            let urlDb = "https://pwa-serv-notify.herokuapp.com/api/pwa/subscribe";
+            return fetch(urlDb, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ class Dashboard extends Component {
             })
         }).then(function (res) {
             if (res.ok) {
-                console.log("new subscriber is added to DB ")
+                console.log("new subscriber is added to DB ", res)
             }
         }).catch(function (err) {
             console.log("server : App subscriber error ", err);
