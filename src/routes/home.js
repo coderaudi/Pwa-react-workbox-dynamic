@@ -41,6 +41,7 @@ class Home extends Component {
         return (
             <div>
                 <h1>Home</h1>
+<div> api test </div>
 
                 {this.state.isData && "Data Loaded.. done"}
                 <button onClick={() => this.postRequest()}> Post</button>
