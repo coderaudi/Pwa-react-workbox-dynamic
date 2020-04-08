@@ -115,7 +115,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
+        <div id="cover-spin"></div>
         <div className="pwa-feature-btns">
 
           <button class="add-button">Add to homescreen</button>

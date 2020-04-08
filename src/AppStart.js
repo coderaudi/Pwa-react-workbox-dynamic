@@ -2,31 +2,39 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch, hashHistory } from 'react-router-dom';
+import { Button } from 'reactstrap';
+
+import { createBrowserHistory } from "history";
 
 import Home from './routes/home';
 import Dashboard from './routes/dashboard';
 import About from './routes/about';
 import Help from './routes/help';
 import Admin from "./routes/admin";
+import Timesheet from './routes/timesheet';
 
+
+const history = createBrowserHistory();
 const MainMenu = () => {
     return (
         <div>
             <Link to="/">
-                <button>home</button>
+                <Button
+                    className="mr-2"
+                    color="primary" size="sm">home</Button>
             </Link>
-            <Link to="/about">
-                <button>About</button>
-            </Link>
+
             <Link to="/dashboard">
-                <button>Notifications </button>
+                <Button
+                    className="mr-2"
+                    color="primary" size="sm">Notifications </Button>
             </Link>
-            <Link to="/help">
-                <button>Help</button>
-            </Link>
+
             <Link to="/admin">
-                <button>Admin</button>
+                <Button
+                    className="mr-2"
+                    color="primary" size="sm">Admin</Button>
             </Link>
 
         </div>
@@ -36,10 +44,11 @@ const MainMenu = () => {
 class App extends Component {
     render() {
         return (
-            <Router>
+            <Router history={history}>
                 <div className="App">
                     <header className="App-header">
-                        <h1 className="App-title">Welcome to React-PWA-WOKRBOX</h1>
+                        <h1 className="App-title">Welcome  to  <br />
+                        Link UP - Lite</h1>
                         <MainMenu />
                     </header>
                     <div>
@@ -49,6 +58,7 @@ class App extends Component {
                             <Route exact path="/about" component={About} />
                             <Route exact path="/dashboard" component={Dashboard} />
                             <Route exact path="/help" component={Help} />
+                            <Route exact path="/timesheets" component={Timesheet} />
                             <Route exact path="/admin" component={Admin} />
 
                         </Switch>
