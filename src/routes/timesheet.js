@@ -6,8 +6,6 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import SpinnerLoading from "../components/loaders";
 
-const queryString = require('query-string');
-
 const url = "https://pwa-serv-notify.herokuapp.com/api/pwa/timesheets/";
 
 
@@ -35,7 +33,8 @@ class Timesheet extends Component {
     }
 
     componentDidMount = () => {
-        const { id } = queryString.parse(this.props.history.location.search);
+        let id = this.props.history.location.search.substring(4);
+
         if (id) {
             this.getTimesheets(id);
             this.setState({ timesheetId: id });
