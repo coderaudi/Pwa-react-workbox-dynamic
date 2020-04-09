@@ -4,7 +4,6 @@ const INDEXDB_DYNAMIC_NAME = "linkup-db";
 const STATIC_FILES = [
   '/',
   '/index.html',
-  '/offline.html'
 ];
 
 
@@ -16,9 +15,6 @@ self.addEventListener('install', function (event) {
         console.log('[Service Worker] Precaching App Shell');
         cache.addAll(STATIC_FILES);
       }))
-
-
-  // create the dynamic store 
 
 });
 
@@ -94,28 +90,6 @@ self.addEventListener('fetch', function (event) {
 
 self.addEventListener('sync', function (event) {
   if (event.tag == 'sync-post') {
-
     console.log("we have data to post online!!!");
-
-
-    const DATABASE_NAME = "LINKUP_DB";
-    const DATABASE_VERSION = 1;
-    const DATABASE_OFFLINE_STORE = "timesheet";
-
-    var DBOpenRequest = window.indexedDB.open(DATABASE_NAME, DATABASE_VERSION);
-    var dbRef;
-    DBOpenRequest.onsuccess = function (e) {
-      dbRef = DBOpenRequest.result;
-    }
-
-    let tx = dbRef.transaction("timesheet", "readonly"); // (1)
-    let store = tx.objectStore("timesheet");
-    console.log("insed index read utility function ", store);
-    let resultStore = store.getAll();
-
-    console.log("your store", resultStore);
-
-
   }
-
 });

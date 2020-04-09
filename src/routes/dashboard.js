@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Spinner, } from 'reactstrap';
 import SpinnerLoading from "../components/loaders";
 import { urlBase64ToUint8Array } from '../helpers/converters';
-const publicVapidKey = "BF18kPvOgCP0yPXaMKLlB2EfJGKnQX0xPFfhbKaFS5wzmhIq8pAy6u1Au4zALvGsdqHeF9N_0yxHaYS9f50cH84";
+
+const publicVapidKey = "BCj54G9kp6-MuxVje45_rEdNd24WnFaDLOquVDqrdeqGy_NwwaeTovYJoKdP429zTri6hqypw4TXKMFF6a57aMQ";
 
 class Dashboard extends Component {
 
