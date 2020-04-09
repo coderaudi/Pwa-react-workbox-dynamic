@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.6476d91560790569aa91248bbad33db3.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("/precache-manifest.ad0a2272e1f9ff0d1040f51e43acf0a2.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 const CACHE_STATIC_NAME = 'static-v24';
 const CACHE_DYNAMIC_NAME = 'dynamic-v2';

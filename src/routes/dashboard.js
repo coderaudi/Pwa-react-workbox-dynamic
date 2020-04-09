@@ -21,7 +21,7 @@ class Dashboard extends Component {
     // configure the push subscription 
 
     configurePushSubscription = () => {
-
+        this.setState({ loading : true});
         console.log("you are inside the web notification subscription code !!");
         if (!'Notification' in navigator) {
             return;
@@ -69,12 +69,16 @@ class Dashboard extends Component {
         }).then(function (res) {
             if (res.ok) {
                 console.log("new subscriber is added to DB ", res);
-
+                this.setState({ loading : false})
                 let subBtn = document.getElementById("sub-notification");
                 subBtn.style.display = "none";
+                alert("Subscription Done Successfully!");
             }
         }).catch(function (err) {
             console.log("server : App subscriber error ", err);
+            this.setState({ loading : false})``
+            alert("Subscription Fail try again !");
+           
         });
 
 
@@ -123,7 +127,8 @@ class Dashboard extends Component {
     render() {
         return (
             <div>
-                <h1>Notification_Dash</h1>
+                <h1>Notification</h1>
+                
                 <div className="card">
                     <div className="container">
                         <h3>Push Notification</h3>
@@ -136,12 +141,15 @@ class Dashboard extends Component {
                         <br />
                         <br />
 
-                        <Button onClick={() => this.pushNotification()}>Push Notification</Button>
+                        <Button
+                          color="primary" size="sm"
+                         onClick={() => this.pushNotification()}>Push Notification</Button>
 
                         <br />
                         <br />
 
-                        <Button onClick={() => this.helpNotification()}>Help page notification </Button>
+                        <Button 
+                          color="primary" size="sm" onClick={() => this.helpNotification()}>Help page notification </Button>
 
 
                         <br />
@@ -149,9 +157,21 @@ class Dashboard extends Component {
 
                         <Button
                             id="sub-notification"
+                            color="primary" size="sm"
                             onClick={() => this.configurePushSubscription()}>
-                            Confirm Push Subscription
+                            Confirm Push Subscription{ " "} 
+                            {
+                    this.state.loading && <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                    />
+                }
                        </Button>
+
+               
 
 
                         <br />
