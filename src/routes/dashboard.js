@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Spinner, } from 'reactstrap';
 import SpinnerLoading from "../components/loaders";
 import { urlBase64ToUint8Array } from '../helpers/converters';
-const publicVapidKey = "BCj54G9kp6-MuxVje45_rEdNd24WnFaDLOquVDqrdeqGy_NwwaeTovYJoKdP429zTri6hqypw4TXKMFF6a57aMQ";
+const publicVapidKey = "BF18kPvOgCP0yPXaMKLlB2EfJGKnQX0xPFfhbKaFS5wzmhIq8pAy6u1Au4zALvGsdqHeF9N_0yxHaYS9f50cH84";
 
 class Dashboard extends Component {
 
@@ -21,8 +21,8 @@ class Dashboard extends Component {
     // configure the push subscription 
 
     configurePushSubscription = () => {
-   
-        this.setState({ loading : true});
+
+        this.setState({ loading: true });
         console.log("you are inside the web notification subscription code !!");
         if (!'Notification' in navigator) {
             return;
@@ -69,18 +69,18 @@ class Dashboard extends Component {
         }).then(function (res) {
             if (res.ok) {
                 console.log("new subscriber is added to DB ", res);
-        this.setState({ loading : false});
+                this.setState({ loading: false });
 
                 let subBtn = document.getElementById("sub-notification");
                 subBtn.style.display = "none";
             }
         }).catch(function (err) {
-        this.setState({ loading : false});
+            this.setState({ loading: false });
 
             console.log("server : App subscriber error ", err);
         });
 
-     
+
 
 
     }
@@ -129,7 +129,7 @@ class Dashboard extends Component {
         return (
             <div>
                 <h1>Notification</h1>
-                
+
                 <div className="card">
                     <div className="container">
                         <h3>Push Notification</h3>
@@ -143,14 +143,14 @@ class Dashboard extends Component {
                         <br />
 
                         <Button
-                          color="primary" size="sm"
-                         onClick={() => this.pushNotification()}>Push Notification</Button>
+                            color="primary" size="sm"
+                            onClick={() => this.pushNotification()}>Push Notification</Button>
 
                         <br />
                         <br />
 
-                        <Button 
-                          color="primary" size="sm" onClick={() => this.helpNotification()}>Help page notification </Button>
+                        <Button
+                            color="primary" size="sm" onClick={() => this.helpNotification()}>Help page notification </Button>
 
 
                         <br />
@@ -160,19 +160,19 @@ class Dashboard extends Component {
                             id="sub-notification"
                             color="primary" size="sm"
                             onClick={() => this.configurePushSubscription()}>
-                            Confirm Push Subscription{ " "} 
+                            Confirm Push Subscription{" "}
                             {
-                    this.state.loading && <Spinner
-                                            as="span"
-                                            animation="border"
-                                            size="sm"
-                                            role="status"
-                                            aria-hidden="true"
-                                            />
-                }
-                       </Button>
+                                this.state.loading && <Spinner
+                                    as="span"
+                                    animation="border"
+                                    size="sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                />
+                            }
+                        </Button>
 
-               
+
 
 
                         <br />
