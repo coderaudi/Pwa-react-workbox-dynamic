@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Button, Form, FormGroup, Label, Input, Spinner, } from 'reactstrap';
+import SpinnerLoading from "../components/loaders";
 
 class Admin extends Component {
 
@@ -48,7 +50,7 @@ class Admin extends Component {
                 <h1>Admin</h1>
                 <div className="card">
                     <div className="container">
-                        <div>  UserName :   <input type="text"
+                        <div>  UserName :   <Input type="text"
                             name="username"
                             value={this.state.username}
                             onChange={e => this.onChangeHandler(e.target.name,
@@ -68,7 +70,7 @@ class Admin extends Component {
                         <div className="container">
                             <h3>Send Notification To All Users</h3>
 
-                             Title :   <input type="text"
+                             Title :   <Input type="text"
                                 name="title"
                                 value={this.state.title}
                                 onChange={e => this.onChangeHandler(e.target.name,
@@ -79,8 +81,8 @@ class Admin extends Component {
 
                             <br /> <br />
 
-                           Body :   <textarea
-                                type="text"
+                           Body :   <Input
+                                type="textarea"
                                 name="body"
                                 value={this.state.body}
                                 onChange={e => this.onChangeHandler(e.target.name,
@@ -92,9 +94,10 @@ class Admin extends Component {
 
                             <br /><br />
                             <div>
-                                {this.state.loading && <p>Loading.....</p>}
-                                <button
-                                    onClick={() => this.sendNotificationToAll()}>Send Notification</button>
+                                {this.state.loading && <SpinnerLoading />}
+                                <Button
+                                    color="primary" size="sm"
+                                    onClick={() => this.sendNotificationToAll()}>Send Notification</Button>
                             </div>
                         </div>
                     </div>

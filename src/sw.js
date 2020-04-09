@@ -1,6 +1,7 @@
-var CACHE_STATIC_NAME = 'static-v24';
-var CACHE_DYNAMIC_NAME = 'dynamic-v2';
-var STATIC_FILES = [
+const CACHE_STATIC_NAME = 'static-v24';
+const CACHE_DYNAMIC_NAME = 'dynamic-v2';
+const INDEXDB_DYNAMIC_NAME = "linkup-db";
+const STATIC_FILES = [
   '/',
   '/index.html',
   '/offline.html'
@@ -8,19 +9,23 @@ var STATIC_FILES = [
 
 
 self.addEventListener('install', function (event) {
-  console.log('[Service Worker] Installing Service Worker ...', event);
+  console.log('[Service Worker] Installing Service Worker ...');
   event.waitUntil(
     caches.open(CACHE_STATIC_NAME)
       .then(function (cache) {
         console.log('[Service Worker] Precaching App Shell');
         cache.addAll(STATIC_FILES);
-      })
-  )
+      }))
+
+
+  // create the dynamic store 
+
 });
 
 
 self.addEventListener('activate', function (event) {
   console.log('[Service Worker] Activating Service Worker ....', event);
+
   event.waitUntil(
     caches.keys()
       .then(function (keyList) {
@@ -40,7 +45,6 @@ self.addEventListener('activate', function (event) {
 // process all the request 
 self.addEventListener('fetch', function (event) {
 
-
   if (event.request.method === "POST") {
     console.log("post request");
 
@@ -50,6 +54,7 @@ self.addEventListener('fetch', function (event) {
           return res;
         })
         .catch(err => {
+          return err;
           console.log("err to process post due to network/ stored in indexdb -- for feature try");
         }));
 
@@ -83,4 +88,34 @@ self.addEventListener('fetch', function (event) {
     );
 
   }
+});
+
+
+
+self.addEventListener('sync', function (event) {
+  if (event.tag == 'sync-post') {
+
+    console.log("we have data to post online!!!");
+
+
+    const DATABASE_NAME = "LINKUP_DB";
+    const DATABASE_VERSION = 1;
+    const DATABASE_OFFLINE_STORE = "timesheet";
+
+    var DBOpenRequest = window.indexedDB.open(DATABASE_NAME, DATABASE_VERSION);
+    var dbRef;
+    DBOpenRequest.onsuccess = function (e) {
+      dbRef = DBOpenRequest.result;
+    }
+
+    let tx = dbRef.transaction("timesheet", "readonly"); // (1)
+    let store = tx.objectStore("timesheet");
+    console.log("insed index read utility function ", store);
+    let resultStore = store.getAll();
+
+    console.log("your store", resultStore);
+
+
+  }
+
 });

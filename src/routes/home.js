@@ -76,7 +76,8 @@ class Home extends Component {
 
             return dispList;
         } else {
-            return <div>No Timesheets</div>
+            return <div className="card">
+                <div className="container"> <div className="text-center"> No Timesheets's</div> </div> </div>
         }
 
     }

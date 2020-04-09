@@ -3,6 +3,7 @@ import axios from "axios";
 import { Button, Form, FormGroup, Label, Input, Spinner, } from 'reactstrap';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { writeData } from '../helpers/utility.js';
 
 import SpinnerLoading from "../components/loaders";
 
@@ -22,8 +23,8 @@ class Timesheet extends Component {
             task: "",
             date: "",
             dateString: "",
-            description: "",
-            hours: "",
+            description: "Hey there Working on Index Db",
+            hours: "08:00",
             status: "",
             projects: ["Progressive App", "GraphQL", "Chrome Chat Extension", "Online UPI", "Training and Dev"],
             tasks: ["Developer", "Testing", "POC", "Interview"],
@@ -106,6 +107,19 @@ class Timesheet extends Component {
         this.setState({ date: date, dateString: dateString })
     }
 
+    sendTimesheetPost = (timesheet) => {
+
+        axios.post(`${url}/add`, timesheet)
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+                this.setState({ loading: false });
+                this.props.history.push('/');
+            }).catch(er => {
+                this.setState({ loading: false });
+            })
+    }
+
     submitTimesheet = (type) => {
 
         const { timesheetId, project, task, dateString, description, hours } = this.state;
@@ -119,11 +133,9 @@ class Timesheet extends Component {
             status: type === "save" ? "pending" : "submit"
         }
 
-
-        // Send the call
         this.setState({ loading: true });
         if (timesheetId) {
-
+            // the request is update Request(save)
             axios.put(`${url}/update/${timesheetId}`, timesheet)
                 .then(res => {
                     console.log(res);
@@ -134,17 +146,29 @@ class Timesheet extends Component {
                 })
 
         } else {
-            axios.post(`${url}/add`, timesheet)
-                .then(res => {
-                    console.log(res);
-                    console.log(res.data);
-                    this.setState({ loading: false });
-                }).catch(er => {
-                    this.setState({ loading: false });
-                })
+
+            // request to post the new data 
+
+            if (navigator.onLine) {
+                // send the req to network
+                console.log("Req goes online--->")
+                this.sendTimesheetPost(timesheet);
+            } else {
+                // store the request in DB
+                console.log("Req goes offline --->")
+                writeData('timesheet', { ...timesheet, reqId: new Date().toISOString() });
+                this.setState({ loading: false });
+
+                navigator.serviceWorker.ready.then(function (swRegistration) {
+                    return swRegistration.sync.register('sync-post');
+                });
+
+            }
+
+
         }
 
-        this.props.history.push('/');
+
 
     }
 
