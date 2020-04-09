@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import { Button, Form, FormGroup, Label, Input, Spinner, } from 'reactstrap';
+import SpinnerLoading from "../components/loaders";
 import { urlBase64ToUint8Array } from '../helpers/converters';
 const publicVapidKey = "BCj54G9kp6-MuxVje45_rEdNd24WnFaDLOquVDqrdeqGy_NwwaeTovYJoKdP429zTri6hqypw4TXKMFF6a57aMQ";
 
@@ -123,40 +124,41 @@ class Dashboard extends Component {
         return (
             <div>
                 <h1>Notification_Dash</h1>
+                <div className="card">
+                    <div className="container">
+                        <h3>Push Notification</h3>
 
-                <h3>Push Notification</h3>
+                        <Input type="text" value={this.state.notificationMessage}
+                            onChange={e => this.setState({ notificationMessage: e.target.value })}
 
-                <input type="text" value={this.state.notificationMessage}
-                    onChange={e => this.setState({ notificationMessage: e.target.value })}
+                        />
 
-                />
+                        <br />
+                        <br />
 
-                <br />
-                <br />
+                        <Button onClick={() => this.pushNotification()}>Push Notification</Button>
 
-                <button onClick={() => this.pushNotification()}>Push Notification</button>
+                        <br />
+                        <br />
 
-                <br />
-                <br />
-
-                <button onClick={() => this.helpNotification()}>Help page notification </button>
-
-
-                <br />
-                <br />
-
-                <button
-                    id="sub-notification"
-                    onClick={() => this.configurePushSubscription()}>
-                    Confirm Push Subscription
-                  </button>
+                        <Button onClick={() => this.helpNotification()}>Help page notification </Button>
 
 
-                <br />
-                <br />
+                        <br />
+                        <br />
 
-                <h6>you will get notification if subscription done!</h6>
+                        <Button
+                            id="sub-notification"
+                            onClick={() => this.configurePushSubscription()}>
+                            Confirm Push Subscription
+                  </Button>
 
+
+                        <br />
+                        <br />
+
+                        <h6>you will get notification if subscription done!</h6>
+                    </div> </div>
             </div>
         )
     }
