@@ -14,7 +14,7 @@ class Admin extends Component {
             loading: false,
             title: "Admin notification!",
             body: "notification body",
-            username: "",
+            username: "the_admin",
             allUsers: []
         }
     }
@@ -88,7 +88,7 @@ class Admin extends Component {
 
 
 
-                {this.state.username === "the_admin" ?
+                {this.state.username === "the_admin" || true ?
                     <div className="card">
                         <div className="container">
                             <h3>Send Notification</h3>

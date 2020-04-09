@@ -88,7 +88,7 @@ export default function register() {
               if (result !== "granted") {
                 console.log("you not allowed for notification permission");
 
-                // you cant re-ask again to user
+
               } else {
                 //
                 // console.log("notification permission done");

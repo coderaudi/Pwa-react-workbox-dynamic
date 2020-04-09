@@ -1,7 +1,7 @@
-importScripts("/precache-manifest.56f9a0999cd298a937901c25fb343754.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("/precache-manifest.72498b545ad3e011211e83f8ffc94dfa.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
-const CACHE_STATIC_NAME = 'static-v25';
-const CACHE_DYNAMIC_NAME = 'dynamic-v3';
+const CACHE_STATIC_NAME = 'static-v26';
+const CACHE_DYNAMIC_NAME = 'dynamic-v4';
 const INDEXDB_DYNAMIC_NAME = "linkup-db";
 const STATIC_FILES = [
   '/',
