@@ -88,6 +88,50 @@ self.addEventListener('fetch', function (event) {
 
 
 
+
+
+//  read the notification from the server 
+
+self.addEventListener('push', function (e) {
+  console.log("someone push the notification !!");
+
+  console.log("server notification data", e.data);
+
+  // generate the notification from server data 
+  let payload = e.data ? JSON.parse(e.data.text()) : {
+    title: "default Title for noitification",
+    body: "default -server push notification body",
+    icon: "/images/icons/icon-96x96.png",
+  };
+
+  var options = {
+    body: payload.body,
+    icon: "/images/icons/icon-96x96.png",
+    badge: "/images/icons/icon-96x96.png",
+    vibrate: [100, 50, 100],
+    data: {
+      dateOfArrival: Date.now(),
+      primaryKey: '2'
+    },
+    actions: [
+      {
+        action: 'open', title: 'Explore this new world',
+        icon: "/images/icons/icon-96x96.png",
+      },
+      {
+        action: 'close', title: 'Close',
+        icon: "/images/icons/icon-96x96.png",
+      },
+    ]
+  };
+  e.waitUntil(
+    self.registration.showNotification(payload.title, options)
+  );
+
+});
+
+
+
 self.addEventListener('sync', function (event) {
   if (event.tag == 'sync-post') {
     console.log("we have data to post online!!!");
