@@ -151,13 +151,15 @@ class Dashboard extends Component {
                             id="sub-notification"
                             onClick={() => this.configurePushSubscription()}>
                             Confirm Push Subscription
-                  </Button>
+                       </Button>
 
 
                         <br />
                         <br />
 
                         <h6>you will get notification if subscription done!</h6>
+
+
                     </div> </div>
             </div>
         )

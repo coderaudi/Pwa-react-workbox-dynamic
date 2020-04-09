@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Spinner, } from 'reactstrap';
+import axios from "axios";
 import SpinnerLoading from "../components/loaders";
-
+const _ = require('lodash');
+const url = "https://pwa-serv-notify.herokuapp.com/api/pwa/subscribers";
+// const url = "http://localhost:5000/api/pwa/subscribers";
 class Admin extends Component {
 
     constructor(params) {
@@ -11,10 +14,29 @@ class Admin extends Component {
             loading: false,
             title: "Admin notification!",
             body: "notification body",
-            username: ""
+            username: "",
+            allUsers: []
         }
     }
 
+
+    componentDidMount = () => {
+        this.getAllSubscribers();
+    }
+
+
+
+    getAllSubscribers = () => {
+        this.setState({ loading: true });
+        axios({
+            url
+        }).then(res => {
+            let data = _.reverse(res.data);
+            this.setState({ allUsers: res.data, loading: false });
+        }).catch(err => {
+            this.setState({ loading: false });
+        })
+    }
 
     sendNotificationToAll = () => {
         this.setState({ loading: true });
@@ -47,11 +69,12 @@ class Admin extends Component {
         return (
             <div>
 
-                <h1>Admin</h1>
+                <h1 className="text-center">Admin</h1>
                 <div className="card">
                     <div className="container">
                         <div>  UserName :   <Input type="text"
                             name="username"
+                            placeholder="the_admin"
                             value={this.state.username}
                             onChange={e => this.onChangeHandler(e.target.name,
                                 e.target.value
@@ -68,7 +91,7 @@ class Admin extends Component {
                 {this.state.username === "the_admin" ?
                     <div className="card">
                         <div className="container">
-                            <h3>Send Notification To All Users</h3>
+                            <h3>Send Notification</h3>
 
                              Title :   <Input type="text"
                                 name="title"
@@ -102,10 +125,29 @@ class Admin extends Component {
                         </div>
                     </div>
                     : <div>
-                        <h5>Only For Admin Users</h5>
+                        <h5 className="text-center">Only For Admin Users</h5>
+
+
                     </div>
                 }
 
+                <div>
+
+                    <div className="card">
+                        <div className="container">
+
+                            <h4>All Subscribers</h4> <Button
+                                color="primary" size="sm"
+                                onClick={() => this.getAllSubscribers()}> Refresh</Button>
+
+
+                            {this.state.allUsers && this.state.allUsers.map((e, i) => {
+                                return <div key={e._id}> <span>{i + 1}. </span> <span>{e._id}</span></div>
+                            })}
+
+
+                        </div></div>
+                </div>
             </div>
         )
     }
