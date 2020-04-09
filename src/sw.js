@@ -38,6 +38,33 @@ self.addEventListener('activate', function (event) {
 
 
 
+
+// notification manage
+self.addEventListener('notificationclick', e => {
+  let notification = e.notification;
+  let action = e.action;
+
+  if (action === 'open') {
+    let url = location.origin;
+    clients.openWindow(url);
+    notification.close();
+  } else {
+    console.log("Notification _Rejected!");
+
+    notification.close();
+  }
+
+})
+
+self.addEventListener('notificationclose', e => {
+  let notification = e.notification;
+  let action = e.action;
+
+  console.log("notification is closed", notification);
+})
+
+
+
 // process all the request 
 self.addEventListener('fetch', function (event) {
 

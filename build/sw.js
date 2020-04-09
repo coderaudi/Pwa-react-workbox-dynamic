@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.72498b545ad3e011211e83f8ffc94dfa.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("/precache-manifest.f0d9b57872a1f8b47e274bbee9294cd4.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 const CACHE_STATIC_NAME = 'static-v26';
 const CACHE_DYNAMIC_NAME = 'dynamic-v4';
@@ -37,6 +37,33 @@ self.addEventListener('activate', function (event) {
   );
   return self.clients.claim();
 });
+
+
+
+
+// notification manage
+self.addEventListener('notificationclick', e => {
+  let notification = e.notification;
+  let action = e.action;
+
+  if (action === 'open') {
+    let url = location.origin;
+    clients.openWindow(url);
+    notification.close();
+  } else {
+    console.log("Notification _Rejected!");
+
+    notification.close();
+  }
+
+})
+
+self.addEventListener('notificationclose', e => {
+  let notification = e.notification;
+  let action = e.action;
+
+  console.log("notification is closed", notification);
+})
 
 
 
