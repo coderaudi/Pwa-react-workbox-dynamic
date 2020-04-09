@@ -21,6 +21,7 @@ class Dashboard extends Component {
     // configure the push subscription 
 
     configurePushSubscription = () => {
+   
         this.setState({ loading : true});
         console.log("you are inside the web notification subscription code !!");
         if (!'Notification' in navigator) {
@@ -36,7 +37,6 @@ class Dashboard extends Component {
         }).then(sub => {
             if (sub === null) {
                 // create a new subscription 
-
                 console.log("we dont have the subcription")
 
                 return swRef.pushManager.subscribe({
@@ -69,17 +69,18 @@ class Dashboard extends Component {
         }).then(function (res) {
             if (res.ok) {
                 console.log("new subscriber is added to DB ", res);
-                this.setState({ loading : false})
+        this.setState({ loading : false});
+
                 let subBtn = document.getElementById("sub-notification");
                 subBtn.style.display = "none";
-                alert("Subscription Done Successfully!");
             }
         }).catch(function (err) {
+        this.setState({ loading : false});
+
             console.log("server : App subscriber error ", err);
-            this.setState({ loading : false})``
-            alert("Subscription Fail try again !");
-           
         });
+
+     
 
 
     }
@@ -162,12 +163,12 @@ class Dashboard extends Component {
                             Confirm Push Subscription{ " "} 
                             {
                     this.state.loading && <Spinner
-                    as="span"
-                    animation="border"
-                    size="sm"
-                    role="status"
-                    aria-hidden="true"
-                    />
+                                            as="span"
+                                            animation="border"
+                                            size="sm"
+                                            role="status"
+                                            aria-hidden="true"
+                                            />
                 }
                        </Button>
 
