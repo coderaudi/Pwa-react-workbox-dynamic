@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.f0d9b57872a1f8b47e274bbee9294cd4.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("/precache-manifest.eae175c7996e5e1271307ce1d9798dab.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 const CACHE_STATIC_NAME = 'static-v26';
 const CACHE_DYNAMIC_NAME = 'dynamic-v4';
@@ -164,6 +164,26 @@ self.addEventListener('push', function (e) {
 self.addEventListener('sync', function (event) {
   if (event.tag == 'sync-post') {
     console.log("we have data to post online!!!");
+
+    let data = {
+      project: "OfflinePost",
+      task: "_OfflinePost_task",
+      date: "01 Apr 2020",
+      description: "post is onffline",
+      hours: "08:00",
+      userid: "001",
+      status: "pending"
+    }
+    fetch('https://pwa-serv-notify.herokuapp.com/api/pwa/timesheets/add', {
+      method: 'post',
+      body: JSON.stringify(data)
+    }).then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      console.log("posteted back to online")
+    });
+
+
   }
 });
 

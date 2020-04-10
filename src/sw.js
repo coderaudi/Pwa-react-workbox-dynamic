@@ -162,5 +162,25 @@ self.addEventListener('push', function (e) {
 self.addEventListener('sync', function (event) {
   if (event.tag == 'sync-post') {
     console.log("we have data to post online!!!");
+
+    let data = {
+      project: "OfflinePost",
+      task: "_OfflinePost_task",
+      date: "01 Apr 2020",
+      description: "post is onffline",
+      hours: "08:00",
+      userid: "001",
+      status: "pending"
+    }
+    fetch('https://pwa-serv-notify.herokuapp.com/api/pwa/timesheets/add', {
+      method: 'post',
+      body: JSON.stringify(data)
+    }).then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      console.log("posteted back to online")
+    });
+
+
   }
 });

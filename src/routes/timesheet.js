@@ -49,12 +49,6 @@ class Timesheet extends Component {
         this.setState({ [name]: value });
     }
 
-    dropdownChangeHandler = () => {
-
-        this.setState({ projectDropdownOpen: true })
-        console.log("Abhijeet dro")
-    }
-
 
     getSelectionList = (title, list, valueName) => {
 
