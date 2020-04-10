@@ -1,3 +1,11 @@
+/**
+ * @ Author: Daniel Lin
+ * @ Create Time: 2020-04-10 01:21:59
+ * @ Modified by: Abhijeet Khire
+ * @ Modified time: 2020-04-10 14:33:39
+ * @ Description:
+ */
+
 
 import React, { Component } from 'react';
 import logo from './logo.svg';
@@ -10,7 +18,7 @@ import { createBrowserHistory } from "history";
 import Home from './routes/home';
 import Dashboard from './routes/dashboard';
 import About from './routes/about';
-import Help from './routes/help';
+import Map from './routes/map.js';
 import Admin from "./routes/admin";
 import Timesheet from './routes/timesheet';
 
@@ -35,6 +43,14 @@ const MainMenu = () => {
                 <Button
                     className="mr-2"
                     color="primary" size="sm">Admin</Button>
+
+            </Link>
+
+            <Link to="/map">
+                <Button
+                    className="mr-2"
+                    color="primary" size="sm">Map</Button>
+
             </Link>
 
         </div>
@@ -48,7 +64,7 @@ class App extends Component {
                 <div className="App">
                     <header className="App-header">
                         <h1 className="App-title">Welcome  to  <br />
-                        Link UP - Lite</h1>
+                        Map - Lite</h1>
                         <MainMenu />
                     </header>
                     <div>
@@ -57,7 +73,7 @@ class App extends Component {
                             <Route exact path="/home" component={Home} />
                             <Route exact path="/about" component={About} />
                             <Route exact path="/dashboard" component={Dashboard} />
-                            <Route exact path="/help" component={Help} />
+                            <Route exact path="/map" component={Map} />
                             <Route exact path="/timesheets" component={Timesheet} />
                             <Route exact path="/admin" component={Admin} />
 
