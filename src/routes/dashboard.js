@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, Spinner, } from 'reactstrap';
+import { Button, Input, Spinner, } from 'reactstrap';
 import SpinnerLoading from "../components/loaders";
 import { urlBase64ToUint8Array } from '../helpers/converters';
 
@@ -130,6 +130,8 @@ class Dashboard extends Component {
         return (
             <div>
                 <h1>Notification</h1>
+
+                {this.state.loading && <SpinnerLoading />}
 
                 <div className="card">
                     <div className="container">

@@ -2,7 +2,7 @@
  * @ Author: Daniel Lin
  * @ Create Time: 2020-04-10 01:21:59
  * @ Modified by: Abhijeet Khire
- * @ Modified time: 2020-04-10 14:33:39
+ * @ Modified time: 2020-04-16 00:05:40
  * @ Description:
  */
 
@@ -21,6 +21,14 @@ import About from './routes/about';
 import Map from './routes/map.js';
 import Admin from "./routes/admin";
 import Timesheet from './routes/timesheet';
+import Mapview from './routes/mapview';
+import MapCluster from "./routes/mapcluster";
+
+// map 
+
+import BasicMap from "./routes/map_react/basicmap";
+
+
 
 
 const history = createBrowserHistory();
@@ -52,6 +60,22 @@ const MainMenu = () => {
                     color="primary" size="sm">Map</Button>
 
             </Link>
+            <Link to="/mapview">
+                <Button
+                    className="mr-2"
+                    color="primary" size="sm">Map 2</Button>
+
+            </Link><Link to="/mapcluster">
+                <Button
+                    className="mr-2"
+                    color="primary" size="sm">Map Cluster</Button>
+
+            </Link>
+
+            <Link to="/map/basic">      <Button
+                className="mr-2"
+                color="primary" size="sm">Map Basic</Button></Link>
+
 
         </div>
     );
@@ -76,6 +100,14 @@ class App extends Component {
                             <Route exact path="/map" component={Map} />
                             <Route exact path="/timesheets" component={Timesheet} />
                             <Route exact path="/admin" component={Admin} />
+                            <Route exact path="/mapview" component={Mapview} />
+                            <Route exact path="/mapcluster" component={MapCluster} />
+
+
+                            <Route exact path="/map/basic" component={BasicMap} />
+
+
+
 
                         </Switch>
                     </div>

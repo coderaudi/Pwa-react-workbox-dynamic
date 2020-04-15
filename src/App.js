@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 
 
@@ -118,8 +118,8 @@ class App extends Component {
         <div id="cover-spin"></div>
         <div className="pwa-feature-btns">
 
-          <button class="add-button">Add to homescreen</button>
-          <button class="enable-notification">Enable Notification</button>
+          <button className="add-button">Add to homescreen</button>
+          <button className="enable-notification">Enable Notification</button>
 
         </div>
 

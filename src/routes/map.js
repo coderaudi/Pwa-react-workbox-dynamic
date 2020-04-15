@@ -2,94 +2,159 @@
  * @ Author: Abhijeet Khire
  * @ Create Time: 2020-04-10 01:21:59
  * @ Modified by: Abhijeet Khire
- * @ Modified time: 2020-04-10 16:42:28
+ * @ Modified time: 2020-04-15 22:25:27
  * @ Description:
  */
 
+import React, { Component } from "react";
+import { google, Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import SpinnerLoading from "../components/loaders";
 
 
-import React, { Component } from 'react'
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+export class MapContainer extends Component {
 
-
-class MapView extends Component {
-
-    constructor(params) {
-
-        super(params);
+    constructor(props) {
+        super(props);
+        this.onMarkerClick = this.onMarkerClick.bind(this);
         this.state = {
-            loading: false,
             showingInfoWindow: false,
+            showMarker: false,
             activeMarker: {},
-            selectedPlace: {},
-        }
+            selectedPlace: {}
+        };
+    }
+
+    handleMarkerView = () => {
+        this.setState({ showMarker: !this.state.showMarker })
     }
 
 
 
-    onMarkerClick = (props, marker, e) =>
+    onMapClick = (e) => {
+
+        console.log("Map Click ...", e);
+    }
+
+    onMapZoomHandler = (e) => {
+
+        console.log("Map is zoomed...", e);
+    }
+    onMarkerClick(props, marker, e) {
+
+        console.log("on Marker click", e);
+
         this.setState({
             selectedPlace: props,
             activeMarker: marker,
             showingInfoWindow: true
         });
+    }
 
-    onMapClicked = (props) => {
-        if (this.state.showingInfoWindow) {
-            this.setState({
-                showingInfoWindow: false,
-                activeMarker: null
-            })
-        }
 
-        console.log("Map click", props);
-    };
+    diplayMapMarks = () => {
+        let data = [
+            {
+                name: "pune",
+                position: {
+                    lat: 18.521609,
+                    lng: 73.854105
+                }
+            },
+            {
+                name: "Pune shanivar",
+                position: {
+                    lat: 18.519259,
+                    lng: 73.855363
+                }
+            },
+            {
+                position: {
+                    lat: 18.521751,
+                    lng: 73.858416
+                },
+                name: "Kasaba peth"
+            },
+            {
+                position: {
+                    lat: 18.517458,
+                    lng: 73.858138
+                },
+                name: "Budhvar peth"
+            },
+            {
+                position: {
+                    lat: 18.524172,
+                    lng: 73.859704
+                },
+                name: "Mangalwar peth"
+            }
+        ];
+
+
+        let markerList = data.map((e, i) => {
+            return <Marker
+                onClick={this.onMarkerClick}
+                position={e.position}
+                name={e.name}
+            />
+        })
+
+        return markerList;
+    }
 
     render() {
-
-        const style = {
-            width: "90%",
-            marginLeft: "5%",
-            height: "90%",
-            marginTop: "10%"
+        if (!this.props.google) {
+            return <div>Loading...</div>;
         }
+
         return (
             <div>
-                <h1 className="text-center">Map</h1>
 
-                <div >
-                    <Map
-                        style={style}
-                        google={window.google}
-                        zoom={14}
-                        initialCenter={{
-                            lat: -1.2884,
-                            lng: 36.8233
-                        }}
-                        centerAroundCurrentLocation={true}
-                    >
-
-                        <Marker onClick={this.onMarkerClick}
-                            name={'Current location'} />
-
-                        <InfoWindow onClose={this.onInfoWindowClose}>
-                            <div>
-                                <h1>{this.state.selectedPlace.name}</h1>
-                            </div>
-                        </InfoWindow>
-                    </Map>
+                <div>
+                    <button
+                        onClick={() => this.handleMarkerView()
+                        }>Show/Hide</button>
                 </div>
 
+                <Map
+                    style={{
+                        width: "90%",
+                        height: "100%",
+                        marginLeft: "5%",
+                        marginTop: "50px"
+                    }}
+                    google={this.props.google}
+                    initialCenter={{
+                        lat: 18.521609,
+                        lng: 73.854105
+                    }}
+                    zoom={14}
+                    onClick={e => this.onMapClick(e)}
+                    onZoomChanged={(e) => this.onMapZoomHandler(e)}
 
+                >
+
+
+
+                    {this.diplayMapMarks()}
+
+
+                    <InfoWindow
+                        marker={this.state.activeMarker}
+                        visible={this.state.showingInfoWindow}
+                    >
+                        <div>
+                            <h1>{this.state.selectedPlace.name}</h1>
+                        </div>
+                    </InfoWindow>
+                </Map>
             </div>
-        )
+        );
     }
 }
-
-
 export default GoogleApiWrapper({
     apiKey: ("AIzaSyCcXjlA3bLlSEkAeMg-jdB6zIm-4gE4lQs"),
-    libraries: ['places']
-})(MapView);
-
+    libraries: ['places'],
+    LoadingContainer: SpinnerLoading
+})(MapContainer);
 

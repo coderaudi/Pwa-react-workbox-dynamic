@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import { Button, Form, FormGroup, Label, Input, Spinner, } from 'reactstrap';
+import { Button, FormGroup, Label, Input } from 'reactstrap';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { writeData } from '../helpers/utility.js';
@@ -58,7 +58,7 @@ class Timesheet extends Component {
             <Label for="exampleSelect">{title}</Label>
             <Input type="select"
                 name={valueName}
-                value={valueName == "project" ? project : task}
+                value={valueName === "project" ? project : task}
                 onChange={(e) => this.onChangeHandler(valueName, e.target.value)}
                 id="exampleSelect">
                 {list.map((e, i) => {
@@ -238,7 +238,7 @@ class Timesheet extends Component {
                                     status:  {timesheet.status}<br />
 
                                     </div>
-                                    {status == "pending" ? <div>
+                                    {status === "pending" ? <div>
                                         <Button
                                             className="mr-2"
                                             color="primary" size="sm"
